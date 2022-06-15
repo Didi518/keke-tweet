@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Feed from '../components/Feed';
 import Sidebar from '../components/Sidebar';
+import Widjets from '../components/Widjets';
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
         <Feed />
 
         {/* Widgets */}
+        <Widjets />
 
         {/* Moale */}
       </main>
