@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Feed from '../components/Feed';
 import Sidebar from '../components/Sidebar';
-import Widjets from '../components/Widjets';
+import Widgets from '../components/Widgets';
 
 export default function Home({ newsResults, randomUsersResults }) {
   return (
@@ -20,7 +20,7 @@ export default function Home({ newsResults, randomUsersResults }) {
         <Feed />
 
         {/* Widgets */}
-        <Widjets
+        <Widgets
           newsResults={newsResults.articles}
           randomUsersResults={randomUsersResults.results}
         />

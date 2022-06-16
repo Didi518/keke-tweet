@@ -2,7 +2,7 @@ import { SearchIcon } from '@heroicons/react/outline';
 import { useState } from 'react';
 import News from './News';
 
-export default function Widjets({ newsResults, randomUsersResults }) {
+export default function Widgets({ newsResults, randomUsersResults }) {
   const [articleNum, setArticleNum] = useState(3);
   const [randomUserNum, setRandomUserNum] = useState(3);
   return (
