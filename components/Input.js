@@ -23,8 +23,11 @@ export default function Input() {
   const filePickerRef = useRef(null);
 
   const sendPost = async () => {
-    if (loading) return;
-    setLoading(true);
+    if (loading) {
+      return;
+    } else {
+      setLoading(true);
+    }
 
     const docRef = await addDoc(collection(db, 'posts'), {
       id: session.user.uid,
@@ -84,7 +87,7 @@ export default function Input() {
               <div className="relative">
                 <XIcon
                   onClick={() => setSelectedFile(null)}
-                  className="h-7 text-black absolute cursor-pointer shadow-md shadow-white rounded-full"
+                  className="border h-7 text-black absolute cursor-pointer shadow-md border-white m-1 rounded-full"
                 />
                 <img
                   src={selectedFile}
