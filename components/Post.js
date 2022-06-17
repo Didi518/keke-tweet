@@ -26,6 +26,7 @@ import { modalState, postIdState } from '../atom/modalAtom';
 export default function Post({ post }) {
   const { data: session } = useSession();
   const [likes, setLikes] = useState([]);
+  const [comments, setComments] = useState([]);
   const [hasLiked, setHasLiked] = useState(false);
   const [open, setOpen] = useRecoilState(modalState);
   const [postId, setPostId] = useRecoilState(postIdState);
@@ -34,6 +35,13 @@ export default function Post({ post }) {
     const unsubscribe = onSnapshot(
       collection(db, 'posts', post.id, 'likes'),
       (snapshot) => setLikes(snapshot.docs)
+    );
+  }, [post.id]);
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(
+      collection(db, 'posts', post.id, 'comments'),
+      (snapshot) => setComments(snapshot.docs)
     );
   }, [post.id]);
 
@@ -75,7 +83,7 @@ export default function Post({ post }) {
         alt="image-utilisateur"
       />
       {/* Partie Droite */}
-      <div className="">
+      <div className="flex-1">
         {/* Header */}
         <div className="flex items-center justify-between">
           {/* Info post utilisateur*/}
@@ -105,17 +113,22 @@ export default function Post({ post }) {
 
         {/* Icones */}
         <div className="flex justify-between text-gray-500 p-2">
-          <ChatIcon
-            onClick={() => {
-              if (!session) {
-                signIn();
-              } else {
-                setPostId(post.id);
-                setOpen(!open);
-              }
-            }}
-            className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100"
-          />
+          <div className="flex items-center select-none">
+            <ChatIcon
+              onClick={() => {
+                if (!session) {
+                  signIn();
+                } else {
+                  setPostId(post.id);
+                  setOpen(!open);
+                }
+              }}
+              className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100"
+            />
+            {comments.length > 0 && (
+              <span className="text-sm">{comments.length}</span>
+            )}
+          </div>
           {session?.user.uid === post?.data().id && (
             <TrashIcon
               onClick={deletePost}
