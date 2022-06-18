@@ -107,12 +107,16 @@ export default function Post({ post, id }) {
         </div>
 
         {/* text du post */}
-        <p className="text-gray-800 text-[15px] sm:text-[16px] mb-2">
+        <p
+          onClick={() => router.push(`/tweet/${id}`)}
+          className="text-gray-800 text-[15px] sm:text-[16px] mb-2"
+        >
           {post?.data()?.text}
         </p>
 
         {/* Image du post */}
         <img
+          onClick={() => router.push(`/tweet/${id}`)}
           className="rounded-2xl mr-2"
           src={post?.data()?.image}
           alt=""
