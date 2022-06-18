@@ -11,6 +11,7 @@ import {
   UserIcon,
 } from '@heroicons/react/outline';
 import { useSession, signIn, signOut } from 'next-auth/react';
+import Image from 'next/image';
 
 export default function Sidebar() {
   const { data: session } = useSession();
@@ -56,13 +57,13 @@ export default function Sidebar() {
           <div className="hoverEffect text-gray-700 flex items-center justify-center xl:justify-start mt-auto">
             <img
               onClick={signOut}
-              src={session.user.image}
+              src={session?.user?.image}
               alt="image-utilisateur"
               className="h-10 w-10 rounded-full xl:mr-2"
             />
             <div className="leading-5 hidden xl:inline">
-              <h4 className="font-bold">{session.user.name}</h4>
-              <p className="text-gray-500">@{session.user.username}</p>
+              <h4 className="font-bold">{session?.user?.name}</h4>
+              <p className="text-gray-500">@{session?.user?.username}</p>
             </div>
             <DotsHorizontalIcon className="h-5 xl:ml-8 hidden xl:inline" />
           </div>
